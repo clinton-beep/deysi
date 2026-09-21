@@ -408,6 +408,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script src="index.js"></script>
-
+    <!-- MÚSICA DE FONDO -->
+    <audio id="musica-fondo" loop src="musica.mp3"></audio>
 </body>
 </html>
