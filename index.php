@@ -337,19 +337,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="sobre-carta">
                         <p class="carta-saludo">Para mi kalapatia Deysi,</p>
                         <p class="carta-texto">
-                            Sé que hoy no puedo tomarte de la mano<br>
-                            ni regalarte flores de verdad, pero quería<br>
+                            Sé que hoy no puedo tomarte de la mano
+                            ni regalarte flores de verdad, pero quería
                             que sintieras lo mismo desde donde estoy y que
                             no olvide lo mucho que me importas.
                         </p>
                         <p class="carta-texto">
-                            Gracias por sostener esta relación a pesar<br>
-                            de la distancia, por las videollamadas,<br>
-                            los mensajes de buenos días y por seguir<br>
+                            Gracias por sostener esta relación a pesar
+                            de la distancia, por las videollamadas,
+                            los mensajes de buenos días y por seguir
                             eligiéndome aunque no sea fácil.
                         </p>
                         <p class="carta-firma">Te amo, hoy y desde lejos.</p>
-                        <br><br> <br>
                     </div>
                     <div class="sobre-solapa"></div>
                     <div class="sobre-sello">💛</div>
