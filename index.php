@@ -334,7 +334,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div id="sobre" class="sobre">
                     <div class="sobre-cuerpo"></div>
                     <div class="sobre-carta">
-                        <p class="carta-saludo">Para mi kalapatia Deysi,</p>
+                        <p class="carta-saludo">Para mi kalapatita Deysi,</p>
                         <p class="carta-texto">
                             Sé que hoy no puedo tomarte de la mano
                             ni regalarte flores de verdad, pero quería
