@@ -331,9 +331,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- ================= ESCENA 4: LA CARTA ================= -->
 
             <div id="escena-carta" class="escena escena-carta oculto">
-                <br><br>
                 <p class="frase-pequena">Una cartita para ti</p>
-
                 <div id="sobre" class="sobre">
                     <div class="sobre-cuerpo"></div>
                     <div class="sobre-carta">
@@ -351,6 +349,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             eligiéndome aunque no sea fácil.
                         </p>
                         <p class="carta-firma">Te amo, hoy y desde lejos.</p>
+                        <br><br> <br>
                     </div>
                     <div class="sobre-solapa"></div>
                     <div class="sobre-sello">💛</div>
@@ -388,7 +387,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span>de Jeferson para Deysi</span>
                 </div>
 
-                <form action="login.php" method="POST">
+                <form action="index.php" method="POST">
 
                     <input
                         type="hidden"
