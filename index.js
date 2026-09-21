@@ -249,7 +249,7 @@ window.addEventListener("resize", () => {
 });
 
 // ============================================================
-// SECUENCIA ROMÁNTICA (VERSIÓN CON TIEMPOS MÁS LENTOS)
+// SECUENCIA ROMÁNTICA (TIEMPOS DUPLICADOS PARA LECTURA CALMADA)
 // ============================================================
 
 if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
@@ -300,27 +300,27 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
         }
     }
 
-    // ESCENA 1 — mensaje de bienvenida (Dura ~10 segundos)
-    setTimeout(() => { mostrar(escenaTexto); }, 1000);
-    setTimeout(() => { ocultar(escenaTexto); }, 11000);
+    // ESCENA 1 — mensaje de bienvenida (Dura ~20 segundos)
+    setTimeout(() => { mostrar(escenaTexto); }, 2000);
+    setTimeout(() => { ocultar(escenaTexto); }, 22000);
 
-    // ESCENA 2 — la distancia que nos une (Dura ~12 segundos)
-    setTimeout(() => { mostrar(escenaDistancia); }, 12500);
-    setTimeout(() => { ocultar(escenaDistancia); }, 24500);
+    // ESCENA 2 — la distancia que nos une (Dura ~24 segundos)
+    setTimeout(() => { mostrar(escenaDistancia); }, 25000);
+    setTimeout(() => { ocultar(escenaDistancia); }, 49000);
 
-    // ESCENA 3 — el ramo (Dura ~12 segundos)
-    setTimeout(() => { mostrar(escenaRamo); }, 26000);
-    setTimeout(() => { ocultar(escenaRamo); }, 38000);
+    // ESCENA 3 — el ramo (Dura ~24 segundos)
+    setTimeout(() => { mostrar(escenaRamo); }, 52000);
+    setTimeout(() => { ocultar(escenaRamo); }, 76000);
 
-    // ESCENA 4 — la carta y el contador (Dura ~15 segundos)
+    // ESCENA 4 — la carta y el contador (Dura ~30 segundos)
     setTimeout(() => {
         mostrar(escenaCarta);
         actualizarContador();
         setTimeout(() => {
             if (sobre) sobre.classList.add("abierto");
-        }, 1500);
-    }, 39500);
-    setTimeout(() => { ocultar(escenaCarta); }, 54500);
+        }, 2000);
+    }, 79000);
+    setTimeout(() => { ocultar(escenaCarta); }, 109000);
 
     // LUNA CRUZANDO EL CIELO
     setTimeout(() => {
@@ -328,11 +328,12 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
         setTimeout(() => {
             luna.classList.add("luna-moviendose");
         }, 100);
-    }, 53000);
+    }, 106000);
 
-    // ESCENA FINAL — aparece de forma pausada al final
-    setTimeout(() => { mostrar(escenaFinal); }, 65000);
+    // ESCENA FINAL — aparece con calma al terminar la carta
+    setTimeout(() => { mostrar(escenaFinal); }, 113000);
 }
+
 // ============================================================
 // CONTROL DE MÚSICA Y SECUENCIA TRAS INGRESAR LA CONTRASEÑA
 // ============================================================
@@ -362,11 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Respaldo por si el navegador bloquea el audio al recargar la página
             document.addEventListener("click", reproducir, { once: true });
             document.addEventListener("touchstart", reproducir, { once: true });
-        }
-
-        // 2. Iniciar la secuencia de escenas románticas
-        if (typeof iniciarSecuenciaRomantica === "function") {
-            iniciarSecuenciaRomantica();
         }
     }
 });
