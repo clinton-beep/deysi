@@ -1315,7 +1315,7 @@ body {
 }
 
 /* ============================================================
-   ESCENA: LA CARTA
+   ESCENA: LA CARTA (Optimizado para ver texto completo en celular)
 ============================================================ */
 
 .escena-carta {
@@ -1325,11 +1325,18 @@ body {
     align-items: center;
 }
 
+/* Subir el título para que la solapa de la carta no lo tape */
+.escena-carta .frase-pequena {
+    margin-bottom: 25px;
+    z-index: 10;
+    position: relative;
+}
+
 .sobre {
     position: relative;
-    width: 300px;
-    height: 200px;
-    margin: 10px auto 25px;
+    width: min(90vw, 330px);
+    min-height: 200px;
+    margin: 0 auto 25px;
 }
 
 .sobre-cuerpo {
@@ -1346,43 +1353,47 @@ body {
     z-index: 1;
 }
 
+/* Tarjeta amplia sin recortes de texto */
 .sobre-carta {
-    position: absolute;
-    left: 8%;
-    bottom: 6px;
-    width: 84%;
-    height: 82%;
+    position: relative;
+    left: 4%;
+    width: 92%;
+    height: auto; /* Permite que el cuadro crezca según el texto */
+    min-height: 280px;
     background: linear-gradient(180deg, #fffdf5, #f4ecd8);
-    border-radius: 4px;
-    padding: 22px 20px;
-    box-shadow: 0 -5px 15px rgba(0,0,0,.2);
-    transform: translateY(6%);
-    transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
-    z-index: 2;
+    border-radius: 8px;
+    padding: 22px 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.35);
+    transform: translateY(0);
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+    z-index: 5;
     text-align: left;
-    overflow: hidden;
+    overflow: visible; /* Elimina la restricción que cortaba el texto */
+    box-sizing: border-box;
 }
 
 .carta-saludo {
     margin: 0 0 10px;
     font-family: 'Great Vibes', cursive;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #b8860b;
+    line-height: 1.2;
 }
 
 .carta-texto {
     margin: 0 0 10px;
     font-family: 'Poppins', sans-serif;
-    font-size: .72rem;
-    line-height: 1.7;
+    font-size: .8rem;
+    line-height: 1.5;
     color: #4a3d22;
 }
 
 .carta-firma {
-    margin: 10px 0 0;
+    margin: 12px 0 0;
     font-family: 'Great Vibes', cursive;
     font-size: 1.4rem;
     color: #b8860b;
+    text-align: right;
 }
 
 .sobre-solapa {
@@ -1391,18 +1402,18 @@ body {
     left: 0;
     width: 100%;
     height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-top: 100px solid #f6d97a;
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 95px solid #f6d97a;
     transform-origin: top;
     transition: transform 1s cubic-bezier(.3,.7,.3,1);
-    z-index: 3;
+    z-index: 6;
     filter: drop-shadow(0 8px 10px rgba(0,0,0,.35));
 }
 
 .sobre-sello {
     position: absolute;
-    top: 78px;
+    top: 75px;
     left: 50%;
     transform: translateX(-50%);
     width: 36px;
@@ -1414,45 +1425,23 @@ body {
     justify-content: center;
     font-size: 1rem;
     box-shadow: 0 4px 10px rgba(0,0,0,.4);
-    z-index: 4;
+    z-index: 7;
     transition: opacity .5s ease;
 }
 
 .sobre.abierto .sobre-solapa {
     transform: rotateX(180deg);
+    z-index: 2; /* Pasa la solapa detrás al abrirse */
 }
 
 .sobre.abierto .sobre-sello {
     opacity: 0;
 }
 
+/* Eleva la tarjeta completa para despliegue visible */
 .sobre.abierto .sobre-carta {
-    transform: translateY(-32%);
+    transform: translateY(-50px);
 }
-
-.contador-reencuentro {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: center;
-    gap: 8px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.contador-label {
-    font-size: .72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.55);
-}
-
-.contador-dias {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
-    color: #ffe45c;
-    text-shadow: 0 0 20px rgba(255,225,70,.3);
-}
-
 /* ============================================================
    RESPONSIVE - CELULARES
 ============================================================ */
