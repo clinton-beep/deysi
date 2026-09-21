@@ -328,14 +328,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
 
-            <!-- ================= ESCENA 4: LA CARTA ================= -->
-
+           <!-- ================= ESCENA 4: LA CARTA ================= -->
             <div id="escena-carta" class="escena escena-carta oculto">
                 <p class="frase-pequena">Una cartita para ti</p>
                 <div id="sobre" class="sobre">
                     <div class="sobre-cuerpo"></div>
-                    <br>
-                    <div class="sobre-carta" height="900">
+                    <div class="sobre-carta">
                         <p class="carta-saludo">Para mi kalapatia Deysi,</p>
                         <p class="carta-texto">
                             Sé que hoy no puedo tomarte de la mano
@@ -354,7 +352,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="sobre-solapa"></div>
                     <div class="sobre-sello">💛</div>
                 </div>
-
             </div>
 
 
