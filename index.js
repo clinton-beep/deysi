@@ -249,7 +249,7 @@ window.addEventListener("resize", () => {
 });
 
 // ============================================================
-// SECUENCIA ROMÁNTICA
+// SECUENCIA ROMÁNTICA (VERSIÓN CON TIEMPOS MÁS LENTOS)
 // ============================================================
 
 if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
@@ -277,8 +277,6 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
 
     // ============================================================
     // CONTADOR PARA EL REENCUENTRO
-    // Cambia esta fecha por el día real en que se van a volver a ver.
-    // Formato: "AAAA-MM-DD"
     // ============================================================
     const FECHA_REENCUENTRO = "2026-12-24";
 
@@ -302,36 +300,36 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
         }
     }
 
-    // ESCENA 1 — mensaje de bienvenida
-    setTimeout(() => { mostrar(escenaTexto); }, 800);
-    setTimeout(() => { ocultar(escenaTexto); }, 6300);
+    // ESCENA 1 — mensaje de bienvenida (Dura ~10 segundos)
+    setTimeout(() => { mostrar(escenaTexto); }, 1000);
+    setTimeout(() => { ocultar(escenaTexto); }, 11000);
 
-    // ESCENA 2 — la distancia que nos une
-    setTimeout(() => { mostrar(escenaDistancia); }, 7200);
-    setTimeout(() => { ocultar(escenaDistancia); }, 13800);
+    // ESCENA 2 — la distancia que nos une (Dura ~12 segundos)
+    setTimeout(() => { mostrar(escenaDistancia); }, 12500);
+    setTimeout(() => { ocultar(escenaDistancia); }, 24500);
 
-    // ESCENA 3 — el ramo
-    setTimeout(() => { mostrar(escenaRamo); }, 14700);
-    setTimeout(() => { ocultar(escenaRamo); }, 22000);
+    // ESCENA 3 — el ramo (Dura ~12 segundos)
+    setTimeout(() => { mostrar(escenaRamo); }, 26000);
+    setTimeout(() => { ocultar(escenaRamo); }, 38000);
 
-    // ESCENA 4 — la carta y el contador
+    // ESCENA 4 — la carta y el contador (Dura ~15 segundos)
     setTimeout(() => {
         mostrar(escenaCarta);
         actualizarContador();
         setTimeout(() => {
             if (sobre) sobre.classList.add("abierto");
-        }, 900);
-    }, 22900);
-    setTimeout(() => { ocultar(escenaCarta); }, 31500);
+        }, 1500);
+    }, 39500);
+    setTimeout(() => { ocultar(escenaCarta); }, 54500);
 
-    // LUNA CRUZANDO EL CIELO (cruce cinematográfico, se ve grande a mitad de camino)
+    // LUNA CRUZANDO EL CIELO
     setTimeout(() => {
         luna.classList.remove("oculto");
         setTimeout(() => {
             luna.classList.add("luna-moviendose");
         }, 100);
-    }, 31000);
+    }, 53000);
 
-    // ESCENA FINAL — aparece justo cuando la luna se ve más grande
-    setTimeout(() => { mostrar(escenaFinal); }, 38500);
+    // ESCENA FINAL — aparece de forma pausada al final
+    setTimeout(() => { mostrar(escenaFinal); }, 65000);
 }
