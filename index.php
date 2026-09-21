@@ -319,7 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                 </div>
-
+                <hr>
                 <p class="dedicatoria">
                     Porque algunas personas llegan a nuestra vida<br>
                     y hacen que todo florezca un poquito más. TE AMO DEYSI💛
@@ -334,7 +334,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p class="frase-pequena">Una cartita para ti</p>
                 <div id="sobre" class="sobre">
                     <div class="sobre-cuerpo"></div>
-                    <div class="sobre-carta">
+                    <div class="sobre-carta" height="500">
                         <p class="carta-saludo">Para mi kalapatia Deysi,</p>
                         <p class="carta-texto">
                             Sé que hoy no puedo tomarte de la mano
