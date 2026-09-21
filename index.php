@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
                 <?php endif; ?>
 
-                <form action="login.php" method="POST" class="formulario">
+                <form action="index.php" method="POST" class="formulario">
 
                     <div class="input-wrapper">
                         <span>♡</span>
