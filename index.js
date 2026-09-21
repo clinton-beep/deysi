@@ -334,35 +334,39 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
     setTimeout(() => { mostrar(escenaFinal); }, 65000);
 }
 // ============================================================
-// CONTROL DE MÚSICA DE FONDO (COMPATIBLE CON MÓVILES)
+// CONTROL DE MÚSICA Y SECUENCIA TRAS INGRESAR LA CONTRASEÑA
 // ============================================================
-const musica = document.getElementById("musica-fondo");
+document.addEventListener("DOMContentLoaded", () => {
+    const musica = document.getElementById("musica-fondo");
 
-if (musica) {
-    musica.volume = 0.6; // Ajusta el volumen aquí (0.1 a 1.0)
+    // Verifica si la contraseña fue correcta
+    if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia) {
+        
+        // 1. Iniciar la música de fondo
+        if (musica) {
+            musica.volume = 0.6; // Volumen al 60%
 
-    const reproducir = () => {
-        musica.play().then(() => {
-            // Si la reproducción inicia con éxito, removemos los eventos de escucha
-            removerEventos();
-        }).catch(err => {
-            console.log("El navegador requiere toque del usuario.");
-        });
-    };
+            const reproducir = () => {
+                musica.play().then(() => {
+                    // Si reproduce con éxito, quitamos los eventos de respaldo
+                    document.removeEventListener("click", reproducir);
+                    document.removeEventListener("touchstart", reproducir);
+                }).catch(() => {
+                    console.log("El navegador requiere un toque en la pantalla para iniciar audio.");
+                });
+            };
 
-    const removerEventos = () => {
-        document.removeEventListener("click", reproducir);
-        document.removeEventListener("touchstart", reproducir);
-        document.removeEventListener("touchend", reproducir);
-        document.removeEventListener("scroll", reproducir);
-    };
+            // Intentar reproducir al cargar la sorpresa
+            reproducir();
 
-    // Intentar sonar apenas carga
-    reproducir();
+            // Respaldo por si el navegador bloquea el audio al recargar la página
+            document.addEventListener("click", reproducir, { once: true });
+            document.addEventListener("touchstart", reproducir, { once: true });
+        }
 
-    // Activar al primer toque en cualquier parte de la pantalla
-    document.addEventListener("click", reproducir, { once: true });
-    document.addEventListener("touchstart", reproducir, { once: true });
-    document.addEventListener("touchend", reproducir, { once: true });
-    document.addEventListener("scroll", reproducir, { once: true });
-}
+        // 2. Iniciar la secuencia de escenas románticas
+        if (typeof iniciarSecuenciaRomantica === "function") {
+            iniciarSecuenciaRomantica();
+        }
+    }
+});
