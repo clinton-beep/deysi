@@ -1,0 +1,1491 @@
+/* ============================================================
+   CONFIGURACIÓN GENERAL
+============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #17162c 0%,
+            #080817 45%,
+            #02020b 100%
+        );
+    color: white;
+    font-family:
+        'Playfair Display',
+        serif;
+}
+
+/* ============================================================
+   CANVAS
+============================================================ */
+
+#space-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ============================================================
+   CONTENEDOR
+============================================================ */
+
+.contenedor-principal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    text-align: center;
+}
+
+/* ============================================================
+   ESCENAS
+============================================================ */
+
+.escena {
+    position: absolute;
+    opacity: 0;
+    transform:
+        translateY(20px)
+        scale(.97);
+    transition:
+        opacity 2.2s ease,
+        transform 2.2s cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 1;
+    transform:
+        translateY(0)
+        scale(1);
+    pointer-events: auto;
+}
+
+.oculto {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ============================================================
+   BRILLOS DEL FONDO
+============================================================ */
+
+.glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.glow-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 210, 50, .06);
+    top: 10%;
+    left: 15%;
+}
+
+.glow-2 {
+    width: 350px;
+    height: 350px;
+    background: rgba(130, 90, 255, .07);
+    bottom: 0;
+    right: 5%;
+}
+
+/* ============================================================
+   SISTEMA SOLAR ROMÁNTICO (decorativo, de fondo)
+============================================================ */
+
+#sistema-solar {
+    position: fixed;
+    top: 6%;
+    right: 4%;
+    width: 320px;
+    height: 320px;
+    z-index: 2;
+    opacity: .55;
+    pointer-events: none;
+    filter: drop-shadow(0 0 25px rgba(255, 210, 120, .1));
+}
+
+.sol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle at 35% 32%,
+            #fff8e0,
+            #ffcf5c 55%,
+            #de8a2b 100%
+        );
+    box-shadow:
+        0 0 40px rgba(255, 205, 90, .55),
+        0 0 90px rgba(255, 180, 70, .22);
+    animation: latido 4s ease-in-out infinite;
+}
+
+.orbita {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(255, 255, 255, .08);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: girarOrbita linear infinite;
+}
+
+.orbita-1 { width: 85px;  height: 85px;  animation-duration: 13s; }
+.orbita-2 { width: 145px; height: 145px; animation-duration: 22s; }
+.orbita-3 { width: 205px; height: 205px; animation-duration: 34s; }
+.orbita-4 { width: 290px; height: 290px; animation-duration: 52s; }
+
+@keyframes girarOrbita {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.planeta {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    border-radius: 50%;
+}
+
+.planeta-1 {
+    background: radial-gradient(circle at 35% 35%, #ffe1ea, #e78ba4);
+    box-shadow: 0 0 10px rgba(231,139,164,.6);
+}
+
+.planeta-2 {
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    top: -8px;
+    background: radial-gradient(circle at 35% 35%, #dbe6ff, #8aa0e0);
+    box-shadow: 0 0 12px rgba(138,160,224,.6);
+}
+
+.planeta-3 {
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    top: -5px;
+    background: radial-gradient(circle at 35% 35%, #e9fff2, #7fd4a5);
+    box-shadow: 0 0 10px rgba(127,212,165,.5);
+}
+
+.planeta-anillo {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    top: -10px;
+    background: radial-gradient(circle at 35% 35%, #fff3d6, #d9a441);
+    box-shadow: 0 0 14px rgba(217,164,65,.6);
+}
+
+.planeta-anillo::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 10px;
+    margin: -5px 0 0 -17px;
+    border: 1.5px solid rgba(255, 230, 180, .55);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+}
+
+/* ============================================================
+   LOGIN
+============================================================ */
+
+.login-card {
+    width: min(90%, 470px);
+    padding: 55px 45px 40px;
+    border-radius: 30px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025)
+        );
+    border: 1px solid rgba(255,255,255,.13);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+}
+
+.corazon-login {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    animation:
+        latido 2s infinite;
+}
+
+@keyframes latido {
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+.mini-linea {
+    width: 45px;
+    height: 1px;
+    background: #f7d84a;
+    margin: 15px auto 20px;
+    box-shadow:
+        0 0 12px rgba(255,220,70,.8);
+}
+
+.pequeno {
+    color: rgba(255,255,255,.62);
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.titulo-login {
+    margin: 10px 0;
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
+    line-height: .9;
+    font-weight: normal;
+    color: #ffe85c;
+    text-shadow:
+        0 0 20px rgba(255,225,70,.25);
+}
+
+.titulo-login span {
+    color: white;
+}
+
+.subtitulo-login {
+    color: rgba(255,255,255,.68);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+/* ============================================================
+   INPUT
+============================================================ */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.input-wrapper span {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffe75c;
+    font-size: 1.2rem;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 16px 22px 16px 50px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid rgba(255,235,59,.35);
+    border-radius: 50px;
+    background:
+        rgba(255,255,255,.06);
+    color: white;
+    outline: none;
+    transition: .4s;
+    text-align: left;
+}
+
+.formulario input::placeholder {
+    color: rgba(255,255,255,.45);
+}
+
+.formulario input:focus {
+    border-color: #ffe85b;
+    box-shadow:
+        0 0 25px rgba(255,220,70,.15);
+    background:
+        rgba(255,255,255,.1);
+}
+
+/* ============================================================
+   BOTÓN PRINCIPAL
+============================================================ */
+
+.formulario button {
+    width: 100%;
+    margin-top: 16px;
+    padding: 15px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background:
+        linear-gradient(
+            100deg,
+            #ffe75c,
+            #f6c936
+        );
+    color: #17120a;
+    font-family: 'Poppins', sans-serif;
+    font-size: .95rem;
+    font-weight: 500;
+    box-shadow:
+        0 10px 30px rgba(255,210,50,.15);
+    transition: .4s;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.formulario button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 15px 35px rgba(255,210,50,.3);
+}
+
+.formulario button b {
+    transition: .3s;
+}
+
+.formulario button:hover b {
+    transform: translateX(5px);
+}
+
+.fecha-especial {
+    margin-top: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,.35);
+}
+
+.error {
+    color: #ff8b8b;
+    font-size: .85rem;
+    margin: 10px 0;
+}
+
+/* ============================================================
+   ESCENA ROMÁNTICA
+============================================================ */
+
+.escena-romantica {
+    width: min(90%, 900px);
+}
+
+.estrella-decorativa {
+    color: #ffe45c;
+    font-size: 1.4rem;
+    animation:
+        brillo 2s infinite;
+}
+
+@keyframes brillo {
+    0%,100% {
+        opacity: .4;
+        transform: scale(.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.frase-pequena {
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    margin-bottom: 15px;
+}
+
+.texto-romantico {
+    margin: 0;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: 1;
+    font-weight: normal;
+    color: white;
+    text-shadow:
+        0 0 35px rgba(255,235,80,.22);
+}
+
+.texto-romantico span {
+    color: #ffe45a;
+    text-shadow:
+        0 0 30px rgba(255,220,60,.4);
+}
+
+.separador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.separador i {
+    width: 70px;
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e7c849
+        );
+}
+
+.separador i:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            #e7c849,
+            transparent
+        );
+}
+
+.separador span {
+    color: #ffe45a;
+}
+
+.frase-secundaria {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,.7);
+    font-style: italic;
+}
+
+/* ============================================================
+   RAMO
+============================================================ */
+
+.escena-ramo {
+    width: min(95%, 800px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mensaje-ramo {
+    margin-bottom: -15px;
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mensaje-ramo span {
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: .65rem;
+    color: rgba(255,255,255,.5);
+}
+
+.mensaje-ramo strong {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.4rem;
+    font-weight: normal;
+    color: #ffe45b;
+}
+
+/* ============================================================
+   BOUQUET
+============================================================ */
+
+.bouquet {
+    position: relative;
+    width: 530px;
+    height: 470px;
+    margin: auto;
+    transform-origin: bottom center;
+}
+
+/* ============================================================
+   TALLOS
+============================================================ */
+
+@property --crecer {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 1;
+}
+
+.tallo {
+    position: absolute;
+    width: 6px;
+    height: 290px;
+    bottom: 55px;
+    left: 50%;
+    transform-origin: bottom;
+    background:
+        linear-gradient(
+            90deg,
+            #294e27,
+            #6c9d4c,
+            #294e27
+        );
+    border-radius: 100%;
+    --crecer: 0;
+    transform: rotate(var(--rot)) scaleY(var(--crecer));
+}
+
+.tallo-1 { --rot: -28deg; }
+.tallo-2 { --rot: -18deg; }
+.tallo-3 { --rot: -9deg; }
+.tallo-4 { --rot: 2deg; }
+.tallo-5 { --rot: 12deg; }
+.tallo-6 { --rot: 22deg; }
+.tallo-7 { --rot: 31deg; }
+
+#escena-ramo.visible .tallo {
+    animation: crecerTallo .9s cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+#escena-ramo.visible .tallo-1 { animation-delay: .05s; }
+#escena-ramo.visible .tallo-2 { animation-delay: .12s; }
+#escena-ramo.visible .tallo-3 { animation-delay: .08s; }
+#escena-ramo.visible .tallo-4 { animation-delay: .18s; }
+#escena-ramo.visible .tallo-5 { animation-delay: .1s; }
+#escena-ramo.visible .tallo-6 { animation-delay: .15s; }
+#escena-ramo.visible .tallo-7 { animation-delay: .07s; }
+
+@keyframes crecerTallo {
+    from { --crecer: 0; }
+    to   { --crecer: 1; }
+}
+
+/* ============================================================
+   HOJAS
+============================================================ */
+
+.hoja {
+    position: absolute;
+    width: 75px;
+    height: 32px;
+    border-radius: 100% 0 100% 0;
+    background:
+        linear-gradient(
+            135deg,
+            #719b4a,
+            #243e25
+        );
+    z-index: 3;
+    box-shadow:
+        inset 0 2px 5px rgba(255,255,255,.15);
+}
+
+.hoja-1 { left: 105px; top: 245px; transform: rotate(25deg); }
+.hoja-2 { left: 160px; top: 280px; transform: rotate(-20deg); }
+.hoja-3 { left: 335px; top: 245px; transform: rotate(-25deg) scaleX(-1); }
+.hoja-4 { left: 290px; top: 300px; transform: rotate(20deg) scaleX(-1); }
+.hoja-5 { left: 210px; top: 330px; transform: rotate(-10deg); }
+.hoja-6 { left: 250px; top: 225px; transform: rotate(25deg); }
+
+/* ============================================================
+   GIRASOLES
+============================================================ */
+
+.flor {
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    z-index: 8;
+    filter:
+        drop-shadow(0 10px 15px rgba(0,0,0,.3));
+}
+
+.girasol {
+    animation:
+        florBalanceo 5s ease-in-out infinite;
+}
+
+@keyframes florBalanceo {
+    0%,100% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(2deg);
+    }
+}
+
+.g1 { left: 205px; top: 40px; transform: scale(1.15); }
+.g2 { left: 75px; top: 105px; transform: scale(.8); }
+.g3 { left: 335px; top: 105px; transform: scale(.85); }
+
+.petalo {
+    position: absolute;
+    width: 43px;
+    height: 72px;
+    left: 41px;
+    top: 27px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(
+        180deg,
+        #fffa85 0%,
+        #ffcc00 45%,
+        #e69500 80%,
+        #b35900 100%
+    );
+    transform-origin: 50% 38px;
+    box-shadow:
+        -2px 2px 6px rgba(0,0,0,0.2),
+        inset 0 0 6px rgba(255,255,255,0.5);
+}
+
+.p1 { transform: rotate(0deg); }
+.p2 { transform: rotate(45deg); }
+.p3 { transform: rotate(90deg); }
+.p4 { transform: rotate(135deg); }
+.p5 { transform: rotate(180deg); }
+.p6 { transform: rotate(225deg); }
+.p7 { transform: rotate(270deg); }
+.p8 { transform: rotate(315deg); }
+
+.centro {
+    position: absolute;
+    width: 47px;
+    height: 47px;
+    left: 39px;
+    top: 39px;
+    border-radius: 50%;
+    /* Textura simulada de semillas */
+    background:
+        radial-gradient(circle at 35% 30%, transparent, rgba(36,21,7,0.8)),
+        repeating-radial-gradient(circle at 50% 50%, #241507 0px, #241507 2px, #38200b 3px, #38200b 4px);
+    box-shadow:
+        inset 0 4px 12px rgba(0,0,0,0.7),
+        0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   ROSAS
+============================================================ */
+
+.rosa {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    z-index: 10;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 35% 35%,
+        #fff37d 0%,
+        #f9d72d 30%,
+        #d38300 70%,
+        #8b4500 100%
+    );
+    box-shadow:
+        0 12px 25px rgba(0,0,0,0.4),
+        inset -4px -4px 10px rgba(0,0,0,0.3);
+}
+
+.rosa span {
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 230, 70, 0.95);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.rosa span:nth-child(1) { transform: rotate(20deg) scale(.9); }
+.rosa span:nth-child(2) { transform: rotate(70deg) scale(.75); }
+.rosa span:nth-child(3) { transform: rotate(120deg) scale(.65); }
+.rosa span:nth-child(4) { transform: rotate(170deg) scale(.8); }
+.rosa span:nth-child(5) { transform: rotate(230deg) scale(.7); }
+
+.r1 { left: 155px; top: 115px; }
+.r2 { left: 300px; top: 120px; }
+.r3 { left: 245px; top: 175px; transform: scale(.72); }
+
+/* ============================================================
+   MARGARITAS
+============================================================ */
+
+.margarita {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    z-index: 9;
+}
+
+.margarita i {
+    position: absolute;
+    width: 22px;
+    height: 38px;
+    left: 21px;
+    top: 13px;
+    border-radius: 50%;
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #f3e9bb
+        );
+    transform-origin:
+        50% 20px;
+}
+
+.margarita i:nth-child(1) { transform: rotate(0deg); }
+.margarita i:nth-child(2) { transform: rotate(45deg); }
+.margarita i:nth-child(3) { transform: rotate(90deg); }
+.margarita i:nth-child(4) { transform: rotate(135deg); }
+.margarita i:nth-child(5) { transform: rotate(180deg); }
+.margarita i:nth-child(6) { transform: rotate(225deg); }
+.margarita i:nth-child(7) { transform: rotate(270deg); }
+.margarita i:nth-child(8) { transform: rotate(315deg); }
+
+.margarita b {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 21px;
+    top: 21px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            #fff27a,
+            #e4ad15
+        );
+}
+
+.m1 { left: 125px; top: 180px; transform: scale(.75); }
+.m2 { left: 345px; top: 185px; transform: scale(.7); }
+
+/* ============================================================
+   ENVOLTURA DEL RAMO
+============================================================ */
+
+.envoltura {
+    position: absolute;
+    bottom: 20px;
+    left: 110px;
+    width: 310px;
+    height: 180px;
+    z-index: 12;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.92),
+            rgba(226,216,192,.92)
+        );
+    clip-path:
+        polygon(
+            8% 0,
+            92% 0,
+            72% 100%,
+            28% 100%
+        );
+    filter:
+        drop-shadow(0 15px 15px rgba(0,0,0,.35));
+}
+
+.papel-lazo {
+    position: absolute;
+    bottom: 85px;
+    left: 145px;
+    width: 240px;
+    height: 40px;
+    z-index: 13;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
+    transform: rotate(-2deg);
+}
+
+/* ============================================================
+   LAZO
+============================================================ */
+
+.lazo {
+    position: absolute;
+    bottom: 90px;
+    left: 225px;
+    width: 90px;
+    height: 55px;
+    z-index: 15;
+}
+
+.lazo span {
+    position: absolute;
+    width: 50px;
+    height: 35px;
+    background:
+        linear-gradient(
+            135deg,
+            #f1d35a,
+            #b98b17
+        );
+    top: 5px;
+    border-radius: 8px 30px 8px 30px;
+}
+
+.lazo span:first-child {
+    left: 0;
+    transform: rotate(25deg);
+}
+
+.lazo span:nth-child(2) {
+    right: 0;
+    transform:
+        scaleX(-1)
+        rotate(25deg);
+}
+
+.lazo b {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 32px;
+    top: 15px;
+    border-radius: 50%;
+    background: #e6c13d;
+}
+
+/* ============================================================
+   CINTAS
+============================================================ */
+
+.cinta {
+    position: absolute;
+    bottom: 5px;
+    width: 25px;
+    height: 125px;
+    z-index: 14;
+    background:
+        linear-gradient(
+            90deg,
+            #e5c84c,
+            #fff09b,
+            #c39a22
+        );
+}
+
+.cinta-izq { left: 220px; transform: rotate(8deg); }
+.cinta-der { left: 275px; transform: rotate(-9deg); }
+
+/* ============================================================
+   DESTELLOS
+============================================================ */
+
+.sparkle {
+    position: absolute;
+    color: #fff3a0;
+    z-index: 20;
+    text-shadow:
+        0 0 15px #ffe66a;
+    animation:
+        sparkle 2.5s ease-in-out infinite;
+}
+
+.sparkle-1 { left: 90px; top: 55px; }
+.sparkle-2 { right: 80px; top: 100px; animation-delay: .8s; }
+.sparkle-3 { left: 120px; top: 260px; animation-delay: 1.3s; }
+.sparkle-4 { right: 120px; top: 230px; animation-delay: .4s; }
+
+@keyframes sparkle {
+    0%,100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* ============================================================
+   FLORECIMIENTO ESCALONADO
+============================================================ */
+
+.hoja,
+.flor,
+.rosa,
+.margarita,
+.envoltura,
+.papel-lazo,
+.cinta,
+.lazo {
+    opacity: 0;
+}
+
+@keyframes brotar {
+    from { opacity: 0; filter: blur(6px) brightness(1.5); }
+    to   { opacity: 1; filter: blur(0) brightness(1); }
+}
+
+/* La envoltura aparece primero, como si sostuviera el ramo */
+#escena-ramo.visible .envoltura   { animation: brotar .6s ease-out forwards; animation-delay: 0s; }
+#escena-ramo.visible .papel-lazo  { animation: brotar .6s ease-out forwards; animation-delay: .05s; }
+#escena-ramo.visible .cinta-izq   { animation: brotar .6s ease-out forwards; animation-delay: .1s; }
+#escena-ramo.visible .cinta-der   { animation: brotar .6s ease-out forwards; animation-delay: .12s; }
+#escena-ramo.visible .lazo        { animation: brotar .6s ease-out forwards; animation-delay: .2s; }
+
+/* Las hojas se despliegan mientras los tallos terminan de crecer */
+#escena-ramo.visible .hoja-1 { animation: brotar .6s ease-out forwards; animation-delay: .5s; }
+#escena-ramo.visible .hoja-2 { animation: brotar .6s ease-out forwards; animation-delay: .58s; }
+#escena-ramo.visible .hoja-3 { animation: brotar .6s ease-out forwards; animation-delay: .52s; }
+#escena-ramo.visible .hoja-4 { animation: brotar .6s ease-out forwards; animation-delay: .62s; }
+#escena-ramo.visible .hoja-5 { animation: brotar .6s ease-out forwards; animation-delay: .68s; }
+#escena-ramo.visible .hoja-6 { animation: brotar .6s ease-out forwards; animation-delay: .55s; }
+
+/* Las flores brotan al final, cada una con su propio pulso de vida */
+#escena-ramo.visible .g1 { animation: brotar .7s ease-out forwards, florBalanceo 5s ease-in-out infinite .9s; animation-delay: .85s, .9s; }
+#escena-ramo.visible .g2 { animation: brotar .7s ease-out forwards, florBalanceo 5s ease-in-out infinite 1s;  animation-delay: .95s, 1s; }
+#escena-ramo.visible .g3 { animation: brotar .7s ease-out forwards, florBalanceo 5s ease-in-out infinite 1.05s; animation-delay: 1s, 1.05s; }
+
+#escena-ramo.visible .r1 { animation: brotar .6s ease-out forwards; animation-delay: 1.1s; }
+#escena-ramo.visible .r2 { animation: brotar .6s ease-out forwards; animation-delay: 1.18s; }
+#escena-ramo.visible .r3 { animation: brotar .6s ease-out forwards; animation-delay: 1.25s; }
+
+#escena-ramo.visible .m1 { animation: brotar .6s ease-out forwards; animation-delay: 1.3s; }
+#escena-ramo.visible .m2 { animation: brotar .6s ease-out forwards; animation-delay: 1.35s; }
+
+/* ============================================================
+   DEDICATORIA
+============================================================ */
+
+.dedicatoria {
+    margin-top: -5px;
+    color: rgba(255,255,255,.7);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+/* ============================================================
+   LUNA
+============================================================ */
+
+#luna {
+    position: fixed;
+    top: 30%;
+    left: -22vmin;
+    width: 15vmin;
+    height: 15vmin;
+    min-width: 90px;
+    min-height: 90px;
+    border-radius: 50%;
+    z-index: 6;
+    overflow: hidden;
+    background: radial-gradient(
+        circle at 32% 28%,
+        #fffdf2 0%,
+        #f7f0dc 20%,
+        #e6dbbe 42%,
+        #c6bb9d 65%,
+        #98937f 85%,
+        #6f6b5c 100%
+    );
+    box-shadow:
+        inset -18% -18% 30% rgba(0, 0, 0, .55),
+        inset 10% 10% 18% rgba(255, 255, 255, .35),
+        0 0 8vmin rgba(255, 248, 220, .35);
+    opacity: 0;
+}
+
+#luna::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 244, 214, .3),
+        rgba(255, 244, 214, 0) 70%
+    );
+    z-index: -1;
+}
+
+.mar {
+    position: absolute;
+    border-radius: 55% 40% 60% 45%;
+    background: rgba(20, 18, 10, .12);
+    filter: blur(1.5px);
+}
+
+.mar-1 { width: 46%; height: 36%; top: 14%; left: 10%; }
+.mar-2 { width: 30%; height: 26%; top: 52%; left: 50%; border-radius: 45% 55% 40% 60%; }
+
+.crater {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow:
+        inset 3px 3px 6px rgba(0, 0, 0, 0.28),
+        1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.crater1 { width: 17%; height: 17%; top: 20%; left: 52%; }
+.crater2 { width: 11%; height: 11%; top: 56%; left: 24%; }
+.crater3 { width: 22%; height: 14%; top: 60%; left: 56%; }
+.crater4 { width: 8%;  height: 8%;  top: 34%; left: 20%; }
+.crater5 { width: 6%;  height: 6%;  top: 78%; left: 38%; }
+
+.luna-moviendose {
+    animation: cruceCinematografico 16s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+@keyframes cruceCinematografico {
+    0%   { left: -22vmin; top: 34%; transform: scale(1);   opacity: 0; }
+    8%   { opacity: 1; }
+    45%  { left: 36vw;    top: 20%; transform: scale(3.4); opacity: 1; }
+    55%  { left: 50vw;    top: 18%; transform: scale(3.8); opacity: 1; }
+    92%  { opacity: 1; }
+    100% { left: 118vw;   top: 30%; transform: scale(1);   opacity: 0; }
+}
+
+/* ============================================================
+   ESCENA FINAL
+============================================================ */
+
+.escena-final {
+    width: min(90%, 600px);
+    padding: 35px;
+    border-radius: 30px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.02)
+        );
+    border: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(12px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.35);
+}
+
+.corazones-final {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #ffe35b;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    opacity: .8;
+}
+
+.ositos {
+    font-size: 5.5rem;
+    filter:
+        drop-shadow(
+            0 10px 20px rgba(0,0,0,.35)
+        );
+    animation:
+        ositos 4s ease-in-out infinite;
+}
+
+@keyframes ositos {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.texto-final {
+    margin: 15px 0;
+    font-family:
+        'Great Vibes',
+        cursive;
+    font-size: 3.2rem;
+    font-weight: normal;
+    color: #ffe45c;
+}
+
+.mensaje-final {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,.68);
+    font-style: italic;
+}
+
+.firma {
+    margin: 25px 0;
+    font-size: .9rem;
+    color: rgba(255,255,255,.6);
+    line-height: 1.6;
+}
+
+.firma span {
+    font-family:
+        'Great Vibes',
+        cursive;
+    color: #ffe45c;
+    font-size: 2rem;
+}
+
+/* ============================================================
+   BOTÓN FINAL
+============================================================ */
+
+.btn-finalizar {
+    padding: 12px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .85rem;
+    color: white;
+    background:
+        rgba(255,255,255,.04);
+    border:
+        1px solid rgba(255,255,255,.25);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.btn-finalizar:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 25px rgba(255,255,255,.15);
+}
+
+/* ============================================================
+   ESCENA: LA DISTANCIA
+============================================================ */
+
+.escena-distancia {
+    width: min(92%, 620px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mapa-distancia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 480px;
+    margin: 18px 0 30px;
+}
+
+.punto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.punto-nucleo {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.punto-yo .punto-nucleo {
+    background: #ffe45c;
+    box-shadow: 0 0 18px rgba(255, 228, 92, .8);
+}
+
+.punto-tu .punto-nucleo {
+    background: #a9c2ff;
+    box-shadow: 0 0 18px rgba(169, 194, 255, .8);
+}
+
+.punto-anillo {
+    position: absolute;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0;
+    animation: ondaPunto 2.6s ease-out infinite;
+}
+
+.punto-yo .punto-anillo { color: #ffe45c; }
+.punto-tu .punto-anillo { color: #a9c2ff; animation-delay: 1.3s; }
+
+@keyframes ondaPunto {
+    0% { transform: scale(1); opacity: .6; }
+    100% { transform: scale(3.2); opacity: 0; }
+}
+
+.punto label {
+    font-family: 'Poppins', sans-serif;
+    font-size: .7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+}
+
+.linea-conexion {
+    position: relative;
+    flex: 1;
+    height: 1px;
+    min-width: 90px;
+    background: linear-gradient(
+        90deg,
+        #ffe45c,
+        rgba(255, 255, 255, .35),
+        #a9c2ff
+    );
+    margin-bottom: 24px;
+}
+
+.linea-conexion .pulso {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #fff6d8;
+    box-shadow: 0 0 12px rgba(255, 246, 216, .9);
+    animation: recorrerLinea 3.4s ease-in-out infinite;
+}
+
+.corazon-viajero {
+    position: absolute;
+    top: -13px;
+    left: 0;
+    font-size: .85rem;
+    animation: recorrerLinea 3.4s ease-in-out infinite;
+    animation-delay: .15s;
+}
+
+@keyframes recorrerLinea {
+    0% { left: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+.texto-distancia {
+    margin: 0 0 15px;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    line-height: 1.15;
+    font-weight: normal;
+    color: white;
+}
+
+.texto-distancia span {
+    color: #a9c2ff;
+    text-shadow: 0 0 25px rgba(169, 194, 255, .4);
+}
+
+/* ============================================================
+   ESCENA: LA CARTA
+============================================================ */
+
+.escena-carta {
+    width: min(92%, 480px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sobre {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 10px auto 25px;
+}
+
+.sobre-cuerpo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(255,255,255,.1),
+        rgba(255,255,255,.03)
+    );
+    border: 1px solid rgba(255,235,150,.25);
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0,0,0,.45);
+    z-index: 1;
+}
+
+.sobre-carta {
+    position: absolute;
+    left: 8%;
+    bottom: 6px;
+    width: 84%;
+    height: 82%;
+    background: linear-gradient(180deg, #fffdf5, #f4ecd8);
+    border-radius: 4px;
+    padding: 22px 20px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,.2);
+    transform: translateY(6%);
+    transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+    z-index: 2;
+    text-align: left;
+    overflow: hidden;
+}
+
+.carta-saludo {
+    margin: 0 0 10px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.6rem;
+    color: #b8860b;
+}
+
+.carta-texto {
+    margin: 0 0 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .72rem;
+    line-height: 1.7;
+    color: #4a3d22;
+}
+
+.carta-firma {
+    margin: 10px 0 0;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.4rem;
+    color: #b8860b;
+}
+
+.sobre-solapa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #f6d97a;
+    transform-origin: top;
+    transition: transform 1s cubic-bezier(.3,.7,.3,1);
+    z-index: 3;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,.35));
+}
+
+.sobre-sello {
+    position: absolute;
+    top: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffe45c, #b8860b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,.4);
+    z-index: 4;
+    transition: opacity .5s ease;
+}
+
+.sobre.abierto .sobre-solapa {
+    transform: rotateX(180deg);
+}
+
+.sobre.abierto .sobre-sello {
+    opacity: 0;
+}
+
+.sobre.abierto .sobre-carta {
+    transform: translateY(-32%);
+}
+
+.contador-reencuentro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contador-label {
+    font-size: .72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+}
+
+.contador-dias {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: #ffe45c;
+    text-shadow: 0 0 20px rgba(255,225,70,.3);
+}
+
+/* ============================================================
+   RESPONSIVE - CELULARES
+============================================================ */
+
+@media (max-width: 600px) {
+    .login-card { padding: 40px 25px 30px; }
+    .titulo-login { font-size: 4rem; }
+    .texto-romantico { font-size: 3.7rem; }
+    .frase-secundaria { font-size: .9rem; }
+    .bouquet {
+        transform: scale(.65);
+        margin: -70px 0;
+    }
+    .mensaje-ramo strong { font-size: 2rem; }
+    .dedicatoria { font-size: .85rem; }
+    .ositos { font-size: 4rem; }
+    .texto-final { font-size: 2.7rem; }
+    .mapa-distancia { max-width: 100%; }
+    .linea-conexion { min-width: 50px; }
+    .texto-distancia { font-size: 2.4rem; }
+    .sobre { width: 250px; height: 170px; }
+    .sobre-solapa {
+        border-left-width: 125px;
+        border-right-width: 125px;
+        border-top-width: 85px;
+    }
+    .carta-texto { font-size: .68rem; }
+    #sistema-solar {
+        width: 190px;
+        height: 190px;
+        top: 3%;
+        right: 2%;
+        opacity: .4;
+    }
+    .orbita-4 { display: none; }
+}
