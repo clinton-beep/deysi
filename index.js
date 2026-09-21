@@ -333,3 +333,31 @@ if (typeof iniciarSecuencia !== "undefined" && iniciarSecuencia === true) {
     // ESCENA FINAL — aparece de forma pausada al final
     setTimeout(() => { mostrar(escenaFinal); }, 65000);
 }
+// ============================================================
+// REPRODUCCIÓN AUTOMÁTICA DE MÚSICA
+// ============================================================
+const musica = document.getElementById("musica-fondo");
+
+if (musica) {
+    musica.volume = 0.6; // Nivel de volumen (de 0.0 a 1.0)
+
+    const sonar = () => {
+        musica.play().then(() => {
+            // Si logró sonar automáticamente, se retiran los respaldos
+            document.removeEventListener("click", sonar);
+            document.removeEventListener("touchstart", sonar);
+            document.removeEventListener("scroll", sonar);
+        }).catch(() => {
+            // Si el celular bloquea el inicio sin interacción,
+            // se reproducirá al primer toque invisible en la pantalla
+        });
+    };
+
+    // Intenta sonar inmediatamente al cargar la página
+    sonar();
+
+    // Respaldos invisibles por si el navegador del celular exige una interacción previa
+    document.addEventListener("click", sonar, { once: true });
+    document.addEventListener("touchstart", sonar, { once: true });
+    document.addEventListener("scroll", sonar, { once: true });
+}
